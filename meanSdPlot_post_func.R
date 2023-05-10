@@ -8,15 +8,8 @@ library(ggplot2)
 library(ggrepel)
 library(ggnewscale)
 
-# data --------------------------------------------------------------------
-load(file = "/home/thomas/Documents/PNC_PNET/rdata/pair_idhmut/pair_idhmut_dds.RData")
 
-# exe ---------------------------------------------------------------------
-counts <- DESeq2::counts(dds_wald$data)
-counts <- DESeq2::rlog(object = counts,blind = F)
-
-res <- vsn::meanSdPlot(counts,plot = F,ranks = F)
-
+# fun ---------------------------------------------------------------------
 meanSDplot <- function(counts,genes=NULL,results=NULL,pval=0.05,colname_pval="padj",colname_fold="log2FoldChange"
                        ,rank=F,n_density=100,sel=list(size=2,shape=21,colors=c("red","grey"),labels=c("up","down"),name="Exp."),
                        show.labels=T,graph=T,alpha_dens=1){
@@ -79,8 +72,6 @@ meanSDplot <- function(counts,genes=NULL,results=NULL,pval=0.05,colname_pval="pa
 
   return(df)
 }
-
-df_genes <- meanSDplot(counts,results = dds_wald$res,rank = F)
 
 
   
